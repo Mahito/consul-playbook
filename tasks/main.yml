@@ -18,3 +18,30 @@
     path: /usr/local/bin/consul
     mode: 755
   sudo: yes
+
+- name: Create consul directory
+  file:
+    path: /etc/consul
+    state: directory
+  sudo: yes
+
+- name: Put Consul config
+  template:
+    src: config.json.j2
+    dest: /etc/consul/config.json
+  sudo: yes
+
+- name: Put Consul script
+  copy:
+    src: consul
+    dest: /etc/init.d/consul
+    mode: 0755
+  sudo: yes
+
+- name: Start consul service
+  service:
+    name: consul
+    state: started
+    enabled: yes
+  sudo: yes
+

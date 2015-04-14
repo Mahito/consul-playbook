@@ -6,14 +6,28 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define :consul1 do |conf|
     conf.vm.hostname = 'consul1'
-    conf.vm.network :private_network, ip: '192.168.10.100'
+    conf.vm.network :private_network, ip: '192.168.10.101'
     config.vm.provider :virtualbox do |v|
       v.name   = config.vm.hostname
       v.cpus   = 1
       v.memory = 1024
     end
     config.vm.provision :ansible do |ansible|
-      ansible.playbook = 'consul.yml'
+      ansible.playbook = 'consul1.yml'
+      ansible.verbose  = 'vvv'
+    end
+  end
+
+  config.vm.define :consul2 do |conf|
+    conf.vm.hostname = 'consul2'
+    conf.vm.network :private_network, ip: '192.168.10.102'
+    config.vm.provider :virtualbox do |v|
+      v.name   = config.vm.hostname
+      v.cpus   = 1
+      v.memory = 1024
+    end
+    config.vm.provision :ansible do |ansible|
+      ansible.playbook = 'consul2.yml'
       ansible.verbose  = 'vvv'
     end
   end

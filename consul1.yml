@@ -1,0 +1,14 @@
+- hosts: all
+  roles:
+    - ../consul-playbook
+  vars:
+    consul:
+      server:
+        addresses:
+          - 192.168.10.101
+        bootstrap_expect: 1
+        is_boot_leader: true
+        is_server: true
+      node:
+        name: consul1
+        address: 192.168.10.101

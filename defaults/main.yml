@@ -1,0 +1,10 @@
+consul:
+  node:
+    name: consul
+    address: 192.168.10.100
+  server:
+    addresses:
+      - localhost
+    bootstrap_expect: 1
+    is_boot_leader: false
+    is_server: false
