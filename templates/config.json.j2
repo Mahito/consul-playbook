@@ -1,0 +1,17 @@
+{
+  "bind_addr": "{{consul.node.address}}",
+  "datacenter": "local",
+  "data_dir": "/opt/consul",
+  "log_level": "INFO",
+  "node_name": "{{ consul.node.name }}",
+{% if consul.server.is_server %}
+  "server": true,
+{% endif %}
+{% if consul.server.is_boot_leader %}
+  "bootstrap_expect": {{ consul.server.bootstrap_expect }}
+{% else %}
+  "start_join": [
+   "{{consul.server.addresses|join('", "')}}"
+  ]
+{% endif %}
+}
